@@ -1,0 +1,9 @@
+infrastructure/data/config.yaml
+catalog.json
+data/
+__pycache__/
+*.pyc
+*.pyo
+.env
+*.egg-info/
+.DS_Store

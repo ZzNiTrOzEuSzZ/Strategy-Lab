@@ -1,0 +1,8 @@
+pandas
+numpy
+yfinance
+python-binance
+pyyaml
+pyarrow
+fastparquet
+requests

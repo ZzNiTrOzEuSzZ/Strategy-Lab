@@ -1,0 +1,83 @@
+fx:
+  - ticker: "EURUSD=X"
+    source: yfinance
+    name: "EUR/USD"
+  - ticker: "GBPUSD=X"
+    source: yfinance
+    name: "GBP/USD"
+  - ticker: "USDJPY=X"
+    source: yfinance
+    name: "USD/JPY"
+  - ticker: "USDCHF=X"
+    source: yfinance
+    name: "USD/CHF"
+  - ticker: "AUDUSD=X"
+    source: yfinance
+    name: "AUD/USD"
+  - ticker: "USDCAD=X"
+    source: yfinance
+    name: "USD/CAD"
+  - ticker: "NZDUSD=X"
+    source: yfinance
+    name: "NZD/USD"
+  - ticker: "EURGBP=X"
+    source: yfinance
+    name: "EUR/GBP"
+  - ticker: "EURJPY=X"
+    source: yfinance
+    name: "EUR/JPY"
+  - ticker: "GBPJPY=X"
+    source: yfinance
+    name: "GBP/JPY"
+
+crypto:
+  - ticker: "BTCUSDT"
+    source: binance
+    name: "Bitcoin"
+  - ticker: "ETHUSDT"
+    source: binance
+    name: "Ethereum"
+  - ticker: "BNBUSDT"
+    source: binance
+    name: "BNB"
+  - ticker: "SOLUSDT"
+    source: binance
+    name: "Solana"
+  - ticker: "XRPUSDT"
+    source: binance
+    name: "XRP"
+  - ticker: "ADAUSDT"
+    source: binance
+    name: "Cardano"
+
+equities:
+  - ticker: "SPY"
+    source: yfinance
+    name: "S&P 500 ETF"
+  - ticker: "QQQ"
+    source: yfinance
+    name: "Nasdaq 100 ETF"
+  - ticker: "IWM"
+    source: yfinance
+    name: "Russell 2000 ETF"
+  - ticker: "EFA"
+    source: yfinance
+    name: "Developed Markets ETF"
+  - ticker: "EEM"
+    source: yfinance
+    name: "Emerging Markets ETF"
+  - ticker: "AAPL"
+    source: yfinance
+    name: "Apple"
+  - ticker: "MSFT"
+    source: yfinance
+    name: "Microsoft"
+  - ticker: "GOOGL"
+    source: yfinance
+    name: "Alphabet"
+  - ticker: "JPM"
+    source: yfinance
+    name: "JPMorgan Chase"
+  - ticker: "XOM"
+    source: yfinance
+    name: "ExxonMobil"
