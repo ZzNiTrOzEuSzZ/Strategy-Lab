@@ -1,11 +1,12 @@
 """
-StratLab Data Pipeline — Layer 1
+StratLab Data Pipeline -- Layer 1
 
 Single entry point: ``python pipeline.py``
 
 Reads config/assets.yaml, checks the catalog for stale or missing data,
-fetches only what is needed, and stores analysis-ready Parquet files
-across three data layers (Bronze → Silver → Gold).
+fetches only what is needed via the correct source per asset/timeframe,
+and stores analysis-ready Parquet files across three data layers
+(Bronze -> Silver -> Gold).
 """
 
 import sys
@@ -25,12 +26,18 @@ import yaml
 import pandas as pd
 
 # ---------------------------------------------------------------------------
-# Paths — all relative to this file's location (project root)
+# Paths
 # ---------------------------------------------------------------------------
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
-from infrastructure.data import yfinance_fetcher, normalizer, resampler, catalog
+from infrastructure.data import (
+    yfinance_fetcher,
+    dukascopy_fetcher,
+    normalizer,
+    resampler,
+    catalog,
+)
 
 ASSETS_CONFIG = ROOT / "config" / "assets.yaml"
 CATALOG_PATH = ROOT / "catalog.json"
@@ -38,34 +45,51 @@ DATA_RAW = ROOT / "data" / "raw"
 DATA_SILVER = ROOT / "data" / "silver"
 DATA_GOLD = ROOT / "data" / "gold"
 
-# Base start date for historical data
-DEFAULT_START = "2010-01-01"
+# Start dates per source
+DUKASCOPY_START = "2016-01-01"   # ~10 years of FX intraday
+YFINANCE_DAILY_START = "2010-01-01"
+YFINANCE_HOURLY_MAX_DAYS = 700
 
-# Timeframes we track in the catalog
-GOLD_TIMEFRAMES = ["1W", "1D", "4H", "1H"]
+# Fetch groups: each base fetch produces multiple gold timeframes.
+# key = (source, base_interval) -> gold timeframes it produces
+FETCH_GROUPS = {
+    ("dukascopy", "1h"):  ["1H", "4H"],
+    ("yfinance",  "1h"):  ["1H", "4H"],
+    ("yfinance",  "1d"):  ["1D", "1W"],
+    ("binance",   "1h"):  ["1H", "4H"],
+    ("binance",   "1d"):  ["1D", "1W"],
+}
 
-# Map source → base intervals we need to fetch
-# yfinance: fetch 1h and 1d (4H is resampled from 1h, 1W from 1d)
-# binance:  fetch 1h and 1d via the existing client
-YFINANCE_INTERVALS = ["1h", "1d"]
-BINANCE_INTERVALS = ["1h", "1d"]
+# For each gold timeframe + source, which base interval to fetch
+TF_TO_BASE = {
+    ("dukascopy", "1H"): "1h",
+    ("dukascopy", "4H"): "1h",
+    ("yfinance",  "1H"): "1h",
+    ("yfinance",  "4H"): "1h",
+    ("yfinance",  "1D"): "1d",
+    ("yfinance",  "1W"): "1d",
+    ("binance",   "1H"): "1h",
+    ("binance",   "4H"): "1h",
+    ("binance",   "1D"): "1d",
+    ("binance",   "1W"): "1d",
+}
+
+GOLD_TIMEFRAMES = ["1H", "4H", "1D", "1W"]
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s %(levelname)s %(name)s — %(message)s",
+    format="%(asctime)s %(levelname)s %(name)s -- %(message)s",
     datefmt="%H:%M:%S",
 )
 logger = logging.getLogger("pipeline")
 
-
 # ---------------------------------------------------------------------------
-# Binance helper — wraps the existing binance_client.py interface
+# Binance helper
 # ---------------------------------------------------------------------------
 _binance_client_instance = None
 
 
 def _get_binance_client():
-    """Lazy-initialise the Binance client once per run."""
     global _binance_client_instance
     if _binance_client_instance is None:
         from infrastructure.data.binance_client import get_binance_client
@@ -74,15 +98,8 @@ def _get_binance_client():
 
 
 def _fetch_binance(ticker, interval):
-    """Fetch a single ticker/interval from Binance using the existing client.
-
-    Returns a pandas DataFrame or raises on failure.
-    """
     from infrastructure.data.binance_client import get_data
-
     client = _get_binance_client()
-
-    # Map interval string to Binance constant and lookback days
     interval_map = {
         "1h": ("1h", 1000),
         "1d": ("1d", 5000),
@@ -92,17 +109,16 @@ def _fetch_binance(ticker, interval):
 
 
 # ---------------------------------------------------------------------------
-# Core pipeline logic
+# Helpers
 # ---------------------------------------------------------------------------
 
-def _clean_ticker_name(ticker):
-    """Remove special characters for filenames (e.g. EURUSD=X → EURUSD_X)."""
+def _clean_ticker(ticker):
+    """Clean ticker for use in filenames."""
     return ticker.replace("=", "_").replace("/", "_").replace("^", "_")
 
 
 def _save_bronze(df, asset_class, ticker, interval):
-    """Save raw fetched data to Bronze layer."""
-    clean = _clean_ticker_name(ticker)
+    clean = _clean_ticker(ticker)
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S")
     bronze_dir = DATA_RAW / asset_class
     bronze_dir.mkdir(parents=True, exist_ok=True)
@@ -112,8 +128,7 @@ def _save_bronze(df, asset_class, ticker, interval):
 
 
 def _save_silver(df, asset_class, ticker, interval):
-    """Save normalised data to Silver layer, merging with existing."""
-    clean = _clean_ticker_name(ticker)
+    clean = _clean_ticker(ticker)
     silver_dir = DATA_SILVER / asset_class
     silver_dir.mkdir(parents=True, exist_ok=True)
     filepath = silver_dir / f"{clean}_{interval}.parquet"
@@ -131,77 +146,114 @@ def _save_silver(df, asset_class, ticker, interval):
     return filepath, len(df)
 
 
-def _process_asset(asset_class, asset_info, cat):
-    """Process a single asset: fetch → normalise → resample → save.
+def _get_ticker_for_source(asset_info, source):
+    """Extract the correct ticker field for a given source."""
+    if source == "dukascopy":
+        return asset_info["ticker_dukascopy"]
+    elif source == "binance":
+        return asset_info["ticker_binance"]
+    elif source == "yfinance":
+        return asset_info["ticker_yfinance"]
+    raise ValueError(f"Unknown source: {source}")
 
-    Returns a tuple (ticker, was_updated, error_msg).
+
+# ---------------------------------------------------------------------------
+# Core: process one asset
+# ---------------------------------------------------------------------------
+
+def _process_asset(asset_class, asset_info, cat):
+    """Process a single asset through the pipeline.
+
+    Groups fetches by base interval so that e.g. one Dukascopy 1h fetch
+    produces both 1H and 4H gold timeframes, and one yfinance 1d fetch
+    produces both 1D and 1W.
+
+    Returns (display_ticker, was_updated, None).
     """
-    ticker = asset_info["ticker"]
-    source = asset_info["source"]
-    clean = _clean_ticker_name(ticker)
+    display = asset_info["ticker_display"]
+    sources = asset_info["sources"]  # e.g. {"1H": "dukascopy", "4H": "dukascopy", "1D": "yfinance", "1W": "yfinance"}
 
     # Check if all gold timeframes are fresh
     all_fresh = all(
-        not catalog.is_stale(cat, clean, tf)
+        not catalog.is_stale(cat, display, tf)
         for tf in GOLD_TIMEFRAMES
     )
     if all_fresh:
-        return (ticker, False, None)
+        return (display, False, None)
 
-    print(f"\n  ▸ Processing {ticker} ({source})")
+    print(f"\n  > Processing {display} ({asset_info['name']})")
 
-    # Determine which base intervals to fetch
-    intervals = YFINANCE_INTERVALS if source == "yfinance" else BINANCE_INTERVALS
+    # Group needed timeframes by (source, base_interval) to avoid double fetching
+    # e.g. {("dukascopy","1h"): ["1H","4H"], ("yfinance","1d"): ["1D","1W"]}
+    fetch_plan = {}
+    for tf in GOLD_TIMEFRAMES:
+        if not catalog.is_stale(cat, display, tf):
+            continue
+        src = sources[tf]
+        base = TF_TO_BASE[(src, tf)]
+        key = (src, base)
+        if key not in fetch_plan:
+            fetch_plan[key] = []
+        fetch_plan[key].append(tf)
 
-    # Collect normalised dataframes per interval for resampling
-    silver_frames = {}
+    if not fetch_plan:
+        return (display, False, None)
 
-    for interval in intervals:
-        print(f"    Fetching {interval}...", end=" ", flush=True)
+    # Execute each fetch group
+    for (src, base_interval), target_tfs in fetch_plan.items():
+        ticker = _get_ticker_for_source(asset_info, src)
+        tf_str = "+".join(target_tfs)
+        print(f"    [{src}] Fetching {base_interval} -> {tf_str}...", end=" ", flush=True)
 
         # --- Fetch ---
-        if source == "yfinance":
-            raw_df = yfinance_fetcher.get_data(ticker, interval, DEFAULT_START)
-        elif source == "binance":
-            raw_df = _fetch_binance(ticker, interval)
+        if src == "dukascopy":
+            raw_df = dukascopy_fetcher.get_data(ticker, DUKASCOPY_START)
+        elif src == "yfinance":
+            if base_interval == "1h":
+                start = YFINANCE_DAILY_START
+            else:
+                start = YFINANCE_DAILY_START
+            yf_interval = {"1h": "1h", "1d": "1d"}[base_interval]
+            raw_df = yfinance_fetcher.get_data(ticker, yf_interval, start)
+        elif src == "binance":
+            raw_df = _fetch_binance(ticker, base_interval)
         else:
-            raise ValueError(f"Unknown source: {source}")
+            raise ValueError(f"Unknown source: {src}")
 
         # --- Bronze ---
-        _save_bronze(raw_df, asset_class, ticker, interval)
+        _save_bronze(raw_df, asset_class, ticker, base_interval)
 
-        # --- Normalise ---
-        norm_df = normalizer.normalize(raw_df, source, ticker)
+        # --- Normalize ---
+        norm_df = normalizer.normalize(raw_df, src, display)
 
         # --- Silver ---
-        silver_path, silver_rows = _save_silver(norm_df, asset_class, ticker, interval)
-        print(f"✓ ({silver_rows} rows)")
+        _, silver_rows = _save_silver(norm_df, asset_class, display, base_interval)
+        print(f"{silver_rows} rows in silver")
 
-        silver_frames[interval] = norm_df
-
-    # --- Gold: resample from the highest-resolution data ---
-    # Use 1h data if available (preferred), fall back to 1d
-    if "1h" in silver_frames:
-        base_df = silver_frames["1h"]
-    elif "1d" in silver_frames:
-        base_df = silver_frames["1d"]
-    else:
-        raise ValueError(f"No usable interval data for {ticker}")
-
-    print(f"    Resampling to gold timeframes...")
-    resampled = resampler.resample_to_timeframes(base_df, clean, asset_class)
-    resampler.save_gold(resampled, clean, str(DATA_GOLD))
-
-    # --- Update catalog for every timeframe we produced ---
-    for tf_label, tf_df in resampled.items():
-        start_dt = tf_df.index.min().isoformat()
-        end_dt = tf_df.index.max().isoformat()
-        catalog.update_catalog(
-            cat, clean, asset_class, source, tf_label,
-            start_dt, end_dt, len(tf_df),
+        # --- Gold: resample to target timeframes ---
+        print(f"    Resampling {base_interval} -> {tf_str}...")
+        resampled = resampler.resample_to_timeframes(
+            norm_df, display, asset_class, base_resolution=base_interval
         )
+        resampler.save_gold(resampled, display, str(DATA_GOLD))
 
-    return (ticker, True, None)
+        # --- Depth warning ---
+        depth_warn = None
+        if src == "yfinance" and base_interval == "1h":
+            depth_warn = "yfinance 1h limited to ~2 years"
+
+        # --- Update catalog for produced timeframes ---
+        for tf_label, tf_df in resampled.items():
+            if tf_label in target_tfs:
+                start_dt = tf_df.index.min().isoformat()
+                end_dt = tf_df.index.max().isoformat()
+                catalog.update_catalog(
+                    cat, display, asset_class, src, tf_label,
+                    start_dt, end_dt, len(tf_df),
+                    depth_warning=depth_warn if base_interval == "1h" and src == "yfinance" else None,
+                )
+
+    return (display, True, None)
 
 
 # ---------------------------------------------------------------------------
@@ -216,11 +268,9 @@ def main():
     print(f"  {now_utc}")
     print(f"{'='*50}\n")
 
-    # Load config
     with open(ASSETS_CONFIG, "r") as f:
         assets_config = yaml.safe_load(f)
 
-    # Load catalog
     cat = catalog.get_catalog(str(CATALOG_PATH))
 
     updated = 0
@@ -228,33 +278,33 @@ def main():
     errors = []
 
     for asset_class, assets in assets_config.items():
-        print(f"\n── {asset_class.upper()} ──")
+        print(f"\n-- {asset_class.upper()} --")
         for asset_info in assets:
-            ticker = asset_info["ticker"]
+            display = asset_info["ticker_display"]
             try:
-                _, was_updated, err = _process_asset(asset_class, asset_info, cat)
+                _, was_updated, _ = _process_asset(asset_class, asset_info, cat)
                 if was_updated:
                     updated += 1
                 else:
                     skipped += 1
-                    print(f"  — Skipping {ticker} (all timeframes fresh)")
+                    print(f"  -- Skipping {display} (all timeframes fresh)")
             except Exception as e:
-                errors.append((ticker, str(e)))
-                logger.error(f"Failed {ticker}: {e}")
-                print(f"  ✗ {ticker} — {e}")
+                errors.append((display, str(e)))
+                logger.error(f"Failed {display}: {e}", exc_info=True)
+                print(f"  x {display} -- {e}")
 
-    # Save catalog
     catalog.save_catalog(cat, str(CATALOG_PATH))
 
     elapsed = time.time() - t0
+    mins, secs = divmod(int(elapsed), 60)
     print(f"\n{'='*50}")
-    print(f"  === Pipeline complete ===")
-    print(f"  Assets updated:  {updated}")
-    print(f"  Assets skipped:  {skipped}")
-    print(f"  Errors:          {len(errors)}")
+    print(f"  === StratLab Pipeline Complete ===")
+    print(f"  Updated:  {updated} assets")
+    print(f"  Skipped:  {skipped} assets")
+    print(f"  Errors:   {len(errors)} asset(s)")
     for ticker, msg in errors:
-        print(f"    ✗ {ticker} — {msg}")
-    print(f"  Total time: {elapsed:.0f}s")
+        print(f"    x {ticker} -- {msg}")
+    print(f"  Total time: {mins}m {secs}s")
     print(f"{'='*50}\n")
 
 

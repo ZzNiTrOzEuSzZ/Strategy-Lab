@@ -1,83 +1,246 @@
 fx:
-  - ticker: "EURUSD=X"
-    source: yfinance
-    name: "EUR/USD"
-  - ticker: "GBPUSD=X"
-    source: yfinance
-    name: "GBP/USD"
-  - ticker: "USDJPY=X"
-    source: yfinance
-    name: "USD/JPY"
-  - ticker: "USDCHF=X"
-    source: yfinance
-    name: "USD/CHF"
-  - ticker: "AUDUSD=X"
-    source: yfinance
-    name: "AUD/USD"
-  - ticker: "USDCAD=X"
-    source: yfinance
-    name: "USD/CAD"
-  - ticker: "NZDUSD=X"
-    source: yfinance
-    name: "NZD/USD"
-  - ticker: "EURGBP=X"
-    source: yfinance
-    name: "EUR/GBP"
-  - ticker: "EURJPY=X"
-    source: yfinance
-    name: "EUR/JPY"
-  - ticker: "GBPJPY=X"
-    source: yfinance
-    name: "GBP/JPY"
+  - name: "EUR/USD"
+    ticker_yfinance: "EURUSD=X"
+    ticker_dukascopy: "EURUSD"
+    ticker_display: "EURUSD"
+    sources:
+      1H: dukascopy
+      4H: dukascopy
+      1D: yfinance
+      1W: yfinance
+
+  - name: "GBP/USD"
+    ticker_yfinance: "GBPUSD=X"
+    ticker_dukascopy: "GBPUSD"
+    ticker_display: "GBPUSD"
+    sources:
+      1H: dukascopy
+      4H: dukascopy
+      1D: yfinance
+      1W: yfinance
+
+  - name: "USD/JPY"
+    ticker_yfinance: "USDJPY=X"
+    ticker_dukascopy: "USDJPY"
+    ticker_display: "USDJPY"
+    sources:
+      1H: dukascopy
+      4H: dukascopy
+      1D: yfinance
+      1W: yfinance
+
+  - name: "USD/CHF"
+    ticker_yfinance: "USDCHF=X"
+    ticker_dukascopy: "USDCHF"
+    ticker_display: "USDCHF"
+    sources:
+      1H: dukascopy
+      4H: dukascopy
+      1D: yfinance
+      1W: yfinance
+
+  - name: "AUD/USD"
+    ticker_yfinance: "AUDUSD=X"
+    ticker_dukascopy: "AUDUSD"
+    ticker_display: "AUDUSD"
+    sources:
+      1H: dukascopy
+      4H: dukascopy
+      1D: yfinance
+      1W: yfinance
+
+  - name: "USD/CAD"
+    ticker_yfinance: "USDCAD=X"
+    ticker_dukascopy: "USDCAD"
+    ticker_display: "USDCAD"
+    sources:
+      1H: dukascopy
+      4H: dukascopy
+      1D: yfinance
+      1W: yfinance
+
+  - name: "NZD/USD"
+    ticker_yfinance: "NZDUSD=X"
+    ticker_dukascopy: "NZDUSD"
+    ticker_display: "NZDUSD"
+    sources:
+      1H: dukascopy
+      4H: dukascopy
+      1D: yfinance
+      1W: yfinance
+
+  - name: "EUR/GBP"
+    ticker_yfinance: "EURGBP=X"
+    ticker_dukascopy: "EURGBP"
+    ticker_display: "EURGBP"
+    sources:
+      1H: dukascopy
+      4H: dukascopy
+      1D: yfinance
+      1W: yfinance
+
+  - name: "EUR/JPY"
+    ticker_yfinance: "EURJPY=X"
+    ticker_dukascopy: "EURJPY"
+    ticker_display: "EURJPY"
+    sources:
+      1H: dukascopy
+      4H: dukascopy
+      1D: yfinance
+      1W: yfinance
+
+  - name: "GBP/JPY"
+    ticker_yfinance: "GBPJPY=X"
+    ticker_dukascopy: "GBPJPY"
+    ticker_display: "GBPJPY"
+    sources:
+      1H: dukascopy
+      4H: dukascopy
+      1D: yfinance
+      1W: yfinance
 
 crypto:
-  - ticker: "BTCUSDT"
-    source: binance
-    name: "Bitcoin"
-  - ticker: "ETHUSDT"
-    source: binance
-    name: "Ethereum"
-  - ticker: "BNBUSDT"
-    source: binance
-    name: "BNB"
-  - ticker: "SOLUSDT"
-    source: binance
-    name: "Solana"
-  - ticker: "XRPUSDT"
-    source: binance
-    name: "XRP"
-  - ticker: "ADAUSDT"
-    source: binance
-    name: "Cardano"
+  - name: "Bitcoin"
+    ticker_binance: "BTCUSDT"
+    ticker_display: "BTCUSDT"
+    sources:
+      1H: binance
+      4H: binance
+      1D: binance
+      1W: binance
+
+  - name: "Ethereum"
+    ticker_binance: "ETHUSDT"
+    ticker_display: "ETHUSDT"
+    sources:
+      1H: binance
+      4H: binance
+      1D: binance
+      1W: binance
+
+  - name: "BNB"
+    ticker_binance: "BNBUSDT"
+    ticker_display: "BNBUSDT"
+    sources:
+      1H: binance
+      4H: binance
+      1D: binance
+      1W: binance
+
+  - name: "Solana"
+    ticker_binance: "SOLUSDT"
+    ticker_display: "SOLUSDT"
+    sources:
+      1H: binance
+      4H: binance
+      1D: binance
+      1W: binance
+
+  - name: "XRP"
+    ticker_binance: "XRPUSDT"
+    ticker_display: "XRPUSDT"
+    sources:
+      1H: binance
+      4H: binance
+      1D: binance
+      1W: binance
+
+  - name: "Cardano"
+    ticker_binance: "ADAUSDT"
+    ticker_display: "ADAUSDT"
+    sources:
+      1H: binance
+      4H: binance
+      1D: binance
+      1W: binance
 
 equities:
-  - ticker: "SPY"
-    source: yfinance
-    name: "S&P 500 ETF"
-  - ticker: "QQQ"
-    source: yfinance
-    name: "Nasdaq 100 ETF"
-  - ticker: "IWM"
-    source: yfinance
-    name: "Russell 2000 ETF"
-  - ticker: "EFA"
-    source: yfinance
-    name: "Developed Markets ETF"
-  - ticker: "EEM"
-    source: yfinance
-    name: "Emerging Markets ETF"
-  - ticker: "AAPL"
-    source: yfinance
-    name: "Apple"
-  - ticker: "MSFT"
-    source: yfinance
-    name: "Microsoft"
-  - ticker: "GOOGL"
-    source: yfinance
-    name: "Alphabet"
-  - ticker: "JPM"
-    source: yfinance
-    name: "JPMorgan Chase"
-  - ticker: "XOM"
-    source: yfinance
-    name: "ExxonMobil"
+  - name: "S&P 500 ETF"
+    ticker_yfinance: "SPY"
+    ticker_display: "SPY"
+    sources:
+      1H: yfinance
+      4H: yfinance
+      1D: yfinance
+      1W: yfinance
+
+  - name: "Nasdaq 100 ETF"
+    ticker_yfinance: "QQQ"
+    ticker_display: "QQQ"
+    sources:
+      1H: yfinance
+      4H: yfinance
+      1D: yfinance
+      1W: yfinance
+
+  - name: "Russell 2000 ETF"
+    ticker_yfinance: "IWM"
+    ticker_display: "IWM"
+    sources:
+      1H: yfinance
+      4H: yfinance
+      1D: yfinance
+      1W: yfinance
+
+  - name: "Developed Markets ETF"
+    ticker_yfinance: "EFA"
+    ticker_display: "EFA"
+    sources:
+      1H: yfinance
+      4H: yfinance
+      1D: yfinance
+      1W: yfinance
+
+  - name: "Emerging Markets ETF"
+    ticker_yfinance: "EEM"
+    ticker_display: "EEM"
+    sources:
+      1H: yfinance
+      4H: yfinance
+      1D: yfinance
+      1W: yfinance
+
+  - name: "Apple"
+    ticker_yfinance: "AAPL"
+    ticker_display: "AAPL"
+    sources:
+      1H: yfinance
+      4H: yfinance
+      1D: yfinance
+      1W: yfinance
+
+  - name: "Microsoft"
+    ticker_yfinance: "MSFT"
+    ticker_display: "MSFT"
+    sources:
+      1H: yfinance
+      4H: yfinance
+      1D: yfinance
+      1W: yfinance
+
+  - name: "Alphabet"
+    ticker_yfinance: "GOOGL"
+    ticker_display: "GOOGL"
+    sources:
+      1H: yfinance
+      4H: yfinance
+      1D: yfinance
+      1W: yfinance
+
+  - name: "JPMorgan Chase"
+    ticker_yfinance: "JPM"
+    ticker_display: "JPM"
+    sources:
+      1H: yfinance
+      4H: yfinance
+      1D: yfinance
+      1W: yfinance
+
+  - name: "ExxonMobil"
+    ticker_yfinance: "XOM"
+    ticker_display: "XOM"
+    sources:
+      1H: yfinance
+      4H: yfinance
+      1D: yfinance
+      1W: yfinance
