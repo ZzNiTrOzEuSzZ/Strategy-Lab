@@ -1,3 +1,14 @@
+costs:
+  fx:       0.0002
+  crypto:   0.0006
+  equities: 0.0005
+
+research_defaults:
+  train_bars:  8760
+  test_bars:   4380
+  n_trials:    100
+  start_date:  "2020-01-01"
+
 fx:
   - name: "EUR/USD"
     ticker_yfinance: "EURUSD=X"

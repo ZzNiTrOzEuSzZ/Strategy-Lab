@@ -149,7 +149,7 @@ class Research:
         self.start_date     = start_date
         self.end_date       = end_date
 
-        # Load full context once — sliced per fold during walk-forward
+        # Load full context once -- sliced per fold during walk-forward
         self._full_context = get_context(
             primary_ticker  = primary_ticker,
             primary_tf      = primary_tf,
@@ -259,9 +259,9 @@ class Research:
             cost=self.cost, show_plot=False,
         )
 
-        print(f"\n{'─'*50}")
+        print(f"\n{'-'*50}")
         print(f"Simple Backtest: {self.primary_ticker} {self.primary_tf}")
-        print(f"{'─'*50}")
+        print(f"{'-'*50}")
         print(f"  Total Return:   {_fmt(metrics['total_return'], pct=True)}")
         print(f"  Sharpe Ratio:   {_fmt(metrics['sharpe_ratio'])}")
         print(f"  Max Drawdown:   {_fmt(metrics['max_drawdown'], pct=True)}")
@@ -269,7 +269,7 @@ class Research:
         print(f"  Win Rate:       {_fmt(metrics['win_rate'], pct=True)}")
         print(f"  Num Trades:     {metrics['num_trades']}")
         print(f"  Profit Factor:  {_fmt(metrics['profit_factor'])}")
-        print(f"{'─'*50}")
+        print(f"{'-'*50}")
 
         return metrics
 
@@ -371,7 +371,7 @@ class Research:
         oos_slices      = []
 
         for i, fold in enumerate(folds):
-            print(f"\n{'─'*60}")
+            print(f"\n{'-'*60}")
             print(f"Fold {i+1}/{len(folds)}  "
                   f"train: {fold['train_start'].date()} -> {fold['train_end'].date()}  "
                   f"test: {fold['test_start'].date()} -> {fold['test_end'].date()}")
@@ -454,7 +454,7 @@ class Research:
             results_df["test_return"].notna() & results_df["train_return"].notna()
         ]
         if len(valid) == 0:
-            print("WARNING: no valid folds — loosen reject_fn filters or check strategy output")
+            print("WARNING: no valid folds -- loosen reject_fn filters or check strategy output")
         else:
             print(f"\nOut-of-sample across {len(valid)} fold(s):")
             print(f"  Avg Sharpe:       {valid['test_sharpe'].mean():.2f}")
@@ -469,7 +469,7 @@ class Research:
         if save_csv:
             os.makedirs(os.path.dirname(os.path.abspath(save_csv)), exist_ok=True)
             results_df.to_csv(save_csv, index=False)
-            print(f"\n✓ Fold results saved -> {save_csv}")
+            print(f"\nOK Fold results saved -> {save_csv}")
 
         # Combined OOS backtest
         oos_metrics  = None
@@ -485,7 +485,7 @@ class Research:
             oos_combined = oos_ctx.primary().copy()
 
             if oos_metrics:
-                print(f"\n{'─'*60}")
+                print(f"\n{'-'*60}")
                 print(f"COMBINED OOS: {oos_start.date()} -> {oos_end.date()}")
                 print(f"  Return:        {oos_metrics['total_return']*100:.2f}%")
                 print(f"  Sharpe:        {oos_metrics['sharpe_ratio']:.2f}")
@@ -667,12 +667,12 @@ class Research:
         result_df = pd.DataFrame(records)
 
         print(f"\n{'='*75}")
-        print("PERTURBATION TEST — NEIGHBOURHOOD ROBUSTNESS")
+        print("PERTURBATION TEST -- NEIGHBOURHOOD ROBUSTNESS")
         print(f"{'='*75}")
         print(f"Base score: {base_score:.4f}")
         print(f"{'Offset':>8} {'N valid':>8} {'Mean':>8} {'Median':>8} "
               f"{'Std':>8} {'Min':>8} {'Degradation':>12}")
-        print(f"{'─'*8} {'─'*8} {'─'*8} {'─'*8} {'─'*8} {'─'*8} {'─'*12}")
+        print(f"{'-'*8} {'-'*8} {'-'*8} {'-'*8} {'-'*8} {'-'*8} {'-'*12}")
         for _, row in result_df.iterrows():
             print(f"{row['offset_pct']*100:>7.0f}% {row['n_valid']:>8.0f} "
                   f"{row['mean_score']:>8.4f} {row['median_score']:>8.4f} "
@@ -754,9 +754,10 @@ class Research:
 
     def full_report(
         self,
-        train_bars: int = 504,
-        test_bars:  int = 252,
-        n_trials:   int = 200,
+        train_bars:       int  = 504,
+        test_bars:        int  = 252,
+        n_trials:         int  = 200,
+        skip_robustness:  bool = False,
     ) -> dict:
         """
         Run the complete research pipeline and return all results in one dict.
@@ -802,19 +803,25 @@ class Research:
 
         cp = wf["consensus_params"]
 
-        # 2. Sensitivity
-        print("\n--- Sensitivity Analysis ---")
-        sens = self.sensitivity(cp)
-
-        # 3. Perturbation
-        print("\n--- Perturbation Test ---")
-        pert = self.perturbation(cp)
-
-        # 4. Cost stress
+        sens   = None
+        pert   = None
         cost_st = pd.DataFrame()
-        if wf["oos_combined_df"] is not None:
-            print("\n--- Cost Stress Test ---")
-            cost_st = self.cost_stress(wf["oos_combined_df"])
+
+        if not skip_robustness:
+            # 2. Sensitivity
+            print("\n--- Sensitivity Analysis ---")
+            sens = self.sensitivity(cp)
+
+            # 3. Perturbation
+            print("\n--- Perturbation Test ---")
+            pert = self.perturbation(cp)
+
+            # 4. Cost stress
+            if wf["oos_combined_df"] is not None:
+                print("\n--- Cost Stress Test ---")
+                cost_st = self.cost_stress(wf["oos_combined_df"])
+        else:
+            print("\n[Robustness analysis skipped]")
 
         # Full-period simple backtest with consensus params
         print("\n--- Full-Period Backtest (consensus params) ---")

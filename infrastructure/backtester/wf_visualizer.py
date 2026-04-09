@@ -12,7 +12,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 
-# ── shared style constants (mirrors visualizer.py) ────────────────────────────
+# -- shared style constants (mirrors visualizer.py) ----------------------------
 _BLUE      = '#3b82f6'
 _AMBER     = '#f59e0b'
 _GREEN     = '#22c55e'
@@ -26,9 +26,9 @@ _FONT_MONO = 'monospace'
 _TEMPLATE  = 'plotly_white'
 
 
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
 #  Fold performance bar chart
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
 
 def plot_fold_performance(results_df, show=True, save_html=None):
     """
@@ -101,15 +101,15 @@ def plot_fold_performance(results_df, show=True, save_html=None):
 
     if save_html:
         fig.write_html(save_html)
-        print(f'✓ Saved fold performance chart -> {save_html}')
+        print(f'OK Saved fold performance chart -> {save_html}')
     if show:
         fig.show()
     return fig
 
 
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
 #  Parameter evolution across folds
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
 
 def plot_parameter_evolution(results_df, param_defs, fixed_params=None,
                              show=True, save_html=None):
@@ -120,7 +120,7 @@ def plot_parameter_evolution(results_df, param_defs, fixed_params=None,
     ----------
     results_df : pd.DataFrame
     param_defs : dict
-        {name: ('int'|'float', lo, hi)} — the strategy's PARAM_SPACE.
+        {name: ('int'|'float', lo, hi)} -- the strategy's PARAM_SPACE.
     fixed_params : dict, optional
     show : bool
     save_html : str, optional
@@ -155,7 +155,7 @@ def plot_parameter_evolution(results_df, param_defs, fixed_params=None,
         med = np.median(vals)
         std = np.std(vals)
 
-        # ±1 std band
+        # +/-1 std band
         fig.add_trace(go.Scatter(
             x=fold_nums + fold_nums[::-1],
             y=list(np.full(len(fold_nums), med + std)) +
@@ -164,7 +164,7 @@ def plot_parameter_evolution(results_df, param_defs, fixed_params=None,
             fillcolor='rgba(59, 130, 246, 0.12)',
             line=dict(color='rgba(0,0,0,0)'),
             showlegend=(idx == 0),
-            name='±1 std',
+            name='+/-1 std',
             hoverinfo='skip',
         ), row=row, col=col)
 
@@ -204,15 +204,15 @@ def plot_parameter_evolution(results_df, param_defs, fixed_params=None,
 
     if save_html:
         fig.write_html(save_html)
-        print(f'✓ Saved parameter evolution chart -> {save_html}')
+        print(f'OK Saved parameter evolution chart -> {save_html}')
     if show:
         fig.show()
     return fig
 
 
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
 #  Combined OOS equity curve
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
 
 def plot_oos_equity(oos_metrics, oos_combined_df, fold_boundaries=None,
                    benchmark_data=None, show=True, save_html=None,
@@ -366,15 +366,15 @@ def plot_oos_equity(oos_metrics, oos_combined_df, fold_boundaries=None,
 
     if save_html:
         fig.write_html(save_html)
-        print(f'✓ Saved OOS equity chart -> {save_html}')
+        print(f'OK Saved OOS equity chart -> {save_html}')
     if show:
         fig.show()
     return fig
 
 
-# ──────────────────────────────────────────────────────────────────────────────
-#  Plateau analysis — 1-D parameter sweep curves
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+#  Plateau analysis -- 1-D parameter sweep curves
+# ------------------------------------------------------------------------------
 
 def plot_plateau_analysis(sweep_results, consensus_params, param_defs,
                           fixed_params=None, threshold=0.20,
@@ -470,7 +470,7 @@ def plot_plateau_analysis(sweep_results, consensus_params, param_defs,
     fig.update_layout(
         height=max(400, rows * 300), template=_TEMPLATE,
         title=dict(
-            text='<b>Plateau Analysis — 1-D Parameter Sweeps</b>',
+            text='<b>Plateau Analysis -- 1-D Parameter Sweeps</b>',
             font=dict(size=22, color='#1E293B'), x=0.5, xanchor='center',
         ),
         legend=dict(
@@ -487,15 +487,15 @@ def plot_plateau_analysis(sweep_results, consensus_params, param_defs,
 
     if save_html:
         fig.write_html(save_html)
-        print(f'✓ Saved plateau analysis chart -> {save_html}')
+        print(f'OK Saved plateau analysis chart -> {save_html}')
     if show:
         fig.show()
     return fig
 
 
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
 #  Convenience wrapper
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
 
 def plot_walk_forward_results(
     results,
@@ -562,4 +562,4 @@ def plot_walk_forward_results(
             show_trades=show_trades,
         )
     elif show_oos_equity:
-        print('No valid combined OOS data — skipping equity chart.')
+        print('No valid combined OOS data -- skipping equity chart.')

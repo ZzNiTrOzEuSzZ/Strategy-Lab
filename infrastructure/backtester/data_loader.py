@@ -128,19 +128,23 @@ class BacktestContext:
         -------
         BacktestContext
         """
+        def _to_utc(ts):
+            t = pd.Timestamp(ts)
+            return t.tz_convert("UTC") if t.tzinfo is not None else t.tz_localize("UTC")
+
         primary_sliced = self._primary
         if start is not None:
-            primary_sliced = primary_sliced[primary_sliced.index >= pd.Timestamp(start, tz="UTC")]
+            primary_sliced = primary_sliced[primary_sliced.index >= _to_utc(start)]
         if end is not None:
-            primary_sliced = primary_sliced[primary_sliced.index <= pd.Timestamp(end, tz="UTC")]
+            primary_sliced = primary_sliced[primary_sliced.index <= _to_utc(end)]
 
         aux_sliced = {}
         for tf, df in self._aux.items():
             sliced = df
             if start is not None:
-                sliced = sliced[sliced.index >= pd.Timestamp(start, tz="UTC")]
+                sliced = sliced[sliced.index >= _to_utc(start)]
             if end is not None:
-                sliced = sliced[sliced.index <= pd.Timestamp(end, tz="UTC")]
+                sliced = sliced[sliced.index <= _to_utc(end)]
             aux_sliced[tf] = sliced
 
         return BacktestContext(primary_sliced, aux_sliced)

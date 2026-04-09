@@ -107,7 +107,7 @@ def identify_trades(data):
     trades = []
 
     if len(data[data['position_change'] > 0]) == 0:
-        return pd.DataFrame()
+        return pd.DataFrame(columns=['entry_time', 'exit_time', 'entry_price', 'exit_price', 'direction', 'pnl'])
 
     in_position     = False
     entry_price     = None

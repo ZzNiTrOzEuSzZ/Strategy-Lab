@@ -229,7 +229,7 @@ def plot_results(metrics, benchmark_data=None, show=True, save_html=None):
 
     if save_html:
         fig.write_html(save_html)
-        print(f"✓ Saved interactive chart to: {save_html}")
+        print(f"OK Saved interactive chart to: {save_html}")
 
     if show:
         fig.show()
@@ -290,7 +290,7 @@ def plot_trades_on_price(data, trades_df, show=True, save_html=None):
 
     if save_html:
         fig.write_html(save_html)
-        print(f"✓ Saved trade chart to: {save_html}")
+        print(f"OK Saved trade chart to: {save_html}")
 
     if show:
         fig.show()
@@ -398,7 +398,7 @@ def plot_direction_split(direction_split_dict, show=True, save_html=None):
         height=600,
         template="plotly_white",
         title=dict(
-            text="<b>Direction Split — Combined vs Long-Only vs Short-Only</b>",
+            text="<b>Direction Split -- Combined vs Long-Only vs Short-Only</b>",
             font=dict(size=20, color="#1E293B"),
             x=0.5, xanchor="center",
         ),
@@ -411,7 +411,7 @@ def plot_direction_split(direction_split_dict, show=True, save_html=None):
 
     if save_html:
         fig.write_html(save_html)
-        print(f"✓ Saved direction split chart to: {save_html}")
+        print(f"OK Saved direction split chart to: {save_html}")
 
     if show:
         fig.show()

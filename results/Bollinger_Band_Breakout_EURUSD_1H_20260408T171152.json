@@ -1,0 +1,2144 @@
+{
+  "metadata": {
+    "strategy_name": "Bollinger Band Breakout",
+    "strategy_description": "4H volatility breakout with expanding BBs and directional SMA. 1H entry on pullback to SMA confirmed by reversal pattern. Stop at previous 1H swing high/low. Target 1:1.",
+    "ticker": "EURUSD",
+    "timeframe": "1H",
+    "cost": 0.0002,
+    "run_date": "2026-04-08T17:11:52.321212+00:00",
+    "data_start": "2020-01-01 22:00:00+00:00",
+    "data_end": "2026-04-06 00:00:00+00:00",
+    "total_bars": 39017,
+    "num_folds": 6
+  },
+  "full_period": {
+    "combined": {
+      "total_return": 0.022393002504806025,
+      "sharpe_ratio": 0.6711117067817436,
+      "max_drawdown": -0.008361710936611479,
+      "win_rate": 0.6024096385542169,
+      "num_trades": 83,
+      "avg_win_loss_ratio": 3.208974754701828,
+      "profit_factor": 4.862082961669437,
+      "calmar_ratio": 2.678040735270935
+    },
+    "long_only": {
+      "total_return": 0.016255732289411844,
+      "sharpe_ratio": 2.077547877374781,
+      "max_drawdown": -0.002080361099495923,
+      "win_rate": 0.5142857142857142,
+      "num_trades": 35,
+      "avg_win_loss_ratio": 3.307231459169602,
+      "profit_factor": 3.501774486179579,
+      "calmar_ratio": 7.813899372253524
+    },
+    "short_only": {
+      "total_return": 0.0392133791415275,
+      "sharpe_ratio": 3.0327078047826683,
+      "max_drawdown": -0.002797406227268786,
+      "win_rate": 0.6666666666666666,
+      "num_trades": 48,
+      "avg_win_loss_ratio": 2.9929658122793374,
+      "profit_factor": 5.985931624558675,
+      "calmar_ratio": 14.017763583737
+    }
+  },
+  "walk_forward": {
+    "fold_records": [
+      {
+        "fold": 1,
+        "train_start": "2020-01-01",
+        "train_end": "2021-05-28",
+        "test_start": "2021-05-28",
+        "test_end": "2022-02-08",
+        "optuna_score": 0.46349105329664964,
+        "train_return": 0.013134974263911081,
+        "train_sharpe": 1.8316581242755507,
+        "train_drawdown": -0.00067717016465307,
+        "train_calmar": 19.39685909027081,
+        "train_trades": 10,
+        "train_winrate": 1.0,
+        "train_profit_factor": null,
+        "test_return": 0.004639087205080772,
+        "test_sharpe": 1.5279812926840228,
+        "test_drawdown": -0.0010396512530504998,
+        "test_calmar": 4.462157085338918,
+        "test_trades": 8,
+        "test_winrate": 0.75,
+        "test_profit_factor": 13.88853399325904,
+        "param_bb_period": 18,
+        "param_bb_std": 2.7934476092065963,
+        "param_atr_period": 13,
+        "param_breakout_atr_mult": 1.5729216041040712,
+        "param_ma_period": 27,
+        "param_pullback_bps": 20,
+        "param_max_1h_bars": 28,
+        "param_pullback_atr_mult": 1.5660170154812314,
+        "param_swing_lookback": 10,
+        "param_pattern_wick": 2.831473514506012
+      },
+      {
+        "fold": 2,
+        "train_start": "2020-09-14",
+        "train_end": "2022-02-08",
+        "test_start": "2022-02-09",
+        "test_end": "2022-10-21",
+        "optuna_score": 0.37238167476639494,
+        "train_return": 0.013140502068085258,
+        "train_sharpe": 1.674916094178769,
+        "train_drawdown": -0.0017650933674048241,
+        "train_calmar": 7.4446498472799965,
+        "train_trades": 11,
+        "train_winrate": 0.9090909090909091,
+        "train_profit_factor": 25.796470564699504,
+        "test_return": 0.0052328970121808815,
+        "test_sharpe": 1.7701720042877749,
+        "test_drawdown": -0.0001999999999999847,
+        "test_calmar": 26.16448506090641,
+        "test_trades": 2,
+        "test_winrate": 1.0,
+        "test_profit_factor": null,
+        "param_bb_period": 31,
+        "param_bb_std": 2.769703347016115,
+        "param_atr_period": 16,
+        "param_breakout_atr_mult": 1.6975826388280908,
+        "param_ma_period": 20,
+        "param_pullback_bps": 22,
+        "param_max_1h_bars": 18,
+        "param_pullback_atr_mult": 1.593361824555745,
+        "param_swing_lookback": 5,
+        "param_pattern_wick": 2.698524569604449
+      },
+      {
+        "fold": 3,
+        "train_start": "2021-05-28",
+        "train_end": "2022-10-21",
+        "test_start": "2022-10-21",
+        "test_end": "2023-07-04",
+        "optuna_score": 0.5439679888420114,
+        "train_return": 0.015827991293732024,
+        "train_sharpe": 1.969288879125909,
+        "train_drawdown": -0.0005279545898394522,
+        "train_calmar": 29.9798346265826,
+        "train_trades": 9,
+        "train_winrate": 1.0,
+        "train_profit_factor": null,
+        "test_return": 0.00014751942779467342,
+        "test_sharpe": 0.10474346798878013,
+        "test_drawdown": -0.0013014764901223422,
+        "test_calmar": 0.11334774689691568,
+        "test_trades": 2,
+        "test_winrate": 0.5,
+        "test_profit_factor": 2.0530342260900567,
+        "param_bb_period": 33,
+        "param_bb_std": 2.5690412970457337,
+        "param_atr_period": 15,
+        "param_breakout_atr_mult": 1.5020801510718895,
+        "param_ma_period": 23,
+        "param_pullback_bps": 27,
+        "param_max_1h_bars": 22,
+        "param_pullback_atr_mult": 1.184954747901894,
+        "param_swing_lookback": 14,
+        "param_pattern_wick": 2.373265440681443
+      },
+      {
+        "fold": 4,
+        "train_start": "2022-02-09",
+        "train_end": "2023-07-04",
+        "test_start": "2023-07-04",
+        "test_end": "2024-03-19",
+        "optuna_score": 0.5281323522230554,
+        "train_return": 0.01310354811683645,
+        "train_sharpe": 2.0518984870398955,
+        "train_drawdown": -0.0005572281681071073,
+        "train_calmar": 23.515588168037045,
+        "train_trades": 9,
+        "train_winrate": 0.8888888888888888,
+        "train_profit_factor": 106.77645389028893,
+        "test_return": -0.0006077684599276045,
+        "test_sharpe": -0.2825989429031274,
+        "test_drawdown": -0.002537873242811184,
+        "test_calmar": -0.23947943879749636,
+        "test_trades": 15,
+        "test_winrate": 0.6666666666666666,
+        "test_profit_factor": 5.00370977190841,
+        "param_bb_period": 37,
+        "param_bb_std": 2.9011383416496535,
+        "param_atr_period": 7,
+        "param_breakout_atr_mult": 1.2959397231260938,
+        "param_ma_period": 24,
+        "param_pullback_bps": 15,
+        "param_max_1h_bars": 13,
+        "param_pullback_atr_mult": 1.431865850309521,
+        "param_swing_lookback": 5,
+        "param_pattern_wick": 1.5234541157514414
+      },
+      {
+        "fold": 5,
+        "train_start": "2022-10-21",
+        "train_end": "2024-03-19",
+        "test_start": "2024-03-19",
+        "test_end": "2024-11-28",
+        "optuna_score": 0.1260562547144861,
+        "train_return": 0.0038257456749848373,
+        "train_sharpe": 0.597272908035595,
+        "train_drawdown": -0.0029201208935652864,
+        "train_calmar": 1.3101326330067928,
+        "train_trades": 35,
+        "train_winrate": 0.5714285714285714,
+        "train_profit_factor": 3.757373731345515,
+        "test_return": -0.0016882667802275986,
+        "test_sharpe": -0.6848041820024611,
+        "test_drawdown": -0.0036611488255315224,
+        "test_calmar": -0.4611303338597544,
+        "test_trades": 27,
+        "test_winrate": 0.7037037037037037,
+        "test_profit_factor": 4.623037848260132,
+        "param_bb_period": 19,
+        "param_bb_std": 1.502861567416692,
+        "param_atr_period": 20,
+        "param_breakout_atr_mult": 1.2539613260982678,
+        "param_ma_period": 30,
+        "param_pullback_bps": 24,
+        "param_max_1h_bars": 35,
+        "param_pullback_atr_mult": 1.5274367485261031,
+        "param_swing_lookback": 15,
+        "param_pattern_wick": 1.895098609778247
+      },
+      {
+        "fold": 6,
+        "train_start": "2023-07-04",
+        "train_end": "2024-11-28",
+        "test_start": "2024-11-28",
+        "test_end": "2025-08-13",
+        "optuna_score": 0.329872436625271,
+        "train_return": 0.008256022591970114,
+        "train_sharpe": 1.5392975365689394,
+        "train_drawdown": -0.0018846914819400688,
+        "train_calmar": 4.3805698020513715,
+        "train_trades": 16,
+        "train_winrate": 0.75,
+        "train_profit_factor": 11.21436014814933,
+        "test_return": 0.010343518796471551,
+        "test_sharpe": 1.4399075017698506,
+        "test_drawdown": -0.0010381130491247115,
+        "test_calmar": 9.96376917253157,
+        "test_trades": 5,
+        "test_winrate": 0.6,
+        "test_profit_factor": 22.2052059018813,
+        "param_bb_period": 28,
+        "param_bb_std": 2.824708966882486,
+        "param_atr_period": 14,
+        "param_breakout_atr_mult": 1.7742365906577635,
+        "param_ma_period": 26,
+        "param_pullback_bps": 26,
+        "param_max_1h_bars": 12,
+        "param_pullback_atr_mult": 1.7862767789182106,
+        "param_swing_lookback": 19,
+        "param_pattern_wick": 2.5774960786924312
+      }
+    ],
+    "oos_metrics": {
+      "total_return": 0.016200978550495737,
+      "sharpe_ratio": 0.6805991594927362,
+      "max_drawdown": -0.00836171093661141,
+      "win_rate": 0.5686274509803921,
+      "num_trades": 51,
+      "avg_win_loss_ratio": 3.378626758765202,
+      "profit_factor": 4.453644363826857,
+      "calmar_ratio": 1.937519566666723
+    },
+    "avg_oos_sharpe": 0.64590019030414,
+    "avg_oos_return": 0.0030111645335621127,
+    "avg_oos_drawdown": -0.001629710476773374,
+    "pct_folds_profitable": 0.6666666666666666,
+    "overfit_ratio": 0.4010004136970604,
+    "consensus_params": {
+      "bb_period": 30,
+      "bb_std": 2.7816,
+      "atr_period": 14,
+      "breakout_atr_mult": 1.5375,
+      "ma_period": 25,
+      "pullback_bps": 23,
+      "max_1h_bars": 20,
+      "pullback_atr_mult": 1.5467,
+      "swing_lookback": 12,
+      "pattern_wick": 2.4754
+    },
+    "stability_df": [
+      {
+        "param": "bb_period",
+        "median": 29.5,
+        "std": 7.01585505994973,
+        "cv": 0.23782559525253322,
+        "fixed": false,
+        "stable": false
+      },
+      {
+        "param": "bb_std",
+        "median": 2.781575478111356,
+        "std": 0.48348436042328713,
+        "cv": 0.17381673236189335,
+        "fixed": false,
+        "stable": false
+      },
+      {
+        "param": "atr_period",
+        "median": 14.5,
+        "std": 3.8908725099762504,
+        "cv": 0.26833603517077587,
+        "fixed": false,
+        "stable": false
+      },
+      {
+        "param": "breakout_atr_mult",
+        "median": 1.5375008775879804,
+        "std": 0.19156501414900748,
+        "cv": 0.12459506003634496,
+        "fixed": false,
+        "stable": true
+      },
+      {
+        "param": "ma_period",
+        "median": 25.0,
+        "std": 3.1622776601683795,
+        "cv": 0.1264911064067352,
+        "fixed": false,
+        "stable": true
+      },
+      {
+        "param": "pullback_bps",
+        "median": 23.0,
+        "std": 4.027681991198191,
+        "cv": 0.17511660831296486,
+        "fixed": false,
+        "stable": false
+      },
+      {
+        "param": "max_1h_bars",
+        "median": 20.0,
+        "std": 8.158158833680279,
+        "cv": 0.40790794168401395,
+        "fixed": false,
+        "stable": false
+      },
+      {
+        "param": "pullback_atr_mult",
+        "median": 1.5467268820036673,
+        "std": 0.18181044566857033,
+        "cv": 0.11754528080164268,
+        "fixed": false,
+        "stable": true
+      },
+      {
+        "param": "swing_lookback",
+        "median": 12.0,
+        "std": 5.185449728701348,
+        "cv": 0.4321208107251124,
+        "fixed": false,
+        "stable": false
+      },
+      {
+        "param": "pattern_wick",
+        "median": 2.475380759686937,
+        "std": 0.46349804938800104,
+        "cv": 0.18724313323281222,
+        "fixed": false,
+        "stable": false
+      }
+    ]
+  },
+  "robustness": {
+    "sensitivity": {
+      "bb_period": [
+        {
+          "value": 10,
+          "score": 0.19164901332398038,
+          "sharpe": 0.8716900770877783,
+          "calmar": 3.3798719582294106,
+          "return": 0.030872858645826007,
+          "drawdown": -0.009134327876136217,
+          "trades": 94
+        },
+        {
+          "value": 11,
+          "score": 0.19612691047734723,
+          "sharpe": 0.881333695122163,
+          "calmar": 3.888730508534721,
+          "return": 0.031238918268077454,
+          "drawdown": -0.008033191860304129,
+          "trades": 96
+        },
+        {
+          "value": 13,
+          "score": 0.19784482864839067,
+          "sharpe": 0.887163672048446,
+          "calmar": 3.9986371435700505,
+          "return": 0.03141813906384061,
+          "drawdown": -0.007857211828875768,
+          "trades": 94
+        },
+        {
+          "value": 14,
+          "score": 0.20634141113850066,
+          "sharpe": 0.9170376042760715,
+          "calmar": 4.499774796804791,
+          "return": 0.03262622244468094,
+          "drawdown": -0.007250634513497927,
+          "trades": 97
+        },
+        {
+          "value": 16,
+          "score": 0.21255319905291184,
+          "sharpe": 0.9610870645479428,
+          "calmar": 3.976134015559245,
+          "return": 0.034133704914529384,
+          "drawdown": -0.008584646488513406,
+          "trades": 91
+        },
+        {
+          "value": 17,
+          "score": 0.21020588962112524,
+          "sharpe": 0.9523323913356408,
+          "calmar": 3.857691036144256,
+          "return": 0.033821712995684594,
+          "drawdown": -0.008767346238668516,
+          "trades": 93
+        },
+        {
+          "value": 19,
+          "score": 0.23583414857791973,
+          "sharpe": 1.0582424230662495,
+          "calmar": 4.734233089707949,
+          "return": 0.03858738870975542,
+          "drawdown": -0.008150715855888677,
+          "trades": 90
+        },
+        {
+          "value": 21,
+          "score": 0.21511537207423098,
+          "sharpe": 0.9574941619480375,
+          "calmar": 4.63289155840395,
+          "return": 0.03390614194528041,
+          "drawdown": -0.007318570166783963,
+          "trades": 90
+        },
+        {
+          "value": 22,
+          "score": 0.16318150902769435,
+          "sharpe": 0.7537014243922845,
+          "calmar": 2.417807020758653,
+          "return": 0.02641417840831517,
+          "drawdown": -0.010924849742568372,
+          "trades": 88
+        },
+        {
+          "value": 24,
+          "score": 0.16072742092109826,
+          "sharpe": 0.7429679318209634,
+          "calmar": 2.358065296144317,
+          "return": 0.025763105713799472,
+          "drawdown": -0.010925526852850446,
+          "trades": 86
+        },
+        {
+          "value": 25,
+          "score": 0.18305770901652443,
+          "sharpe": 0.8216639273338103,
+          "calmar": 3.6681215121886566,
+          "return": 0.028823699161432126,
+          "drawdown": -0.007857891039229478,
+          "trades": 90
+        },
+        {
+          "value": 27,
+          "score": 0.15419561996057682,
+          "sharpe": 0.7104816812857431,
+          "calmar": 2.3554631537802897,
+          "return": 0.02414759508950537,
+          "drawdown": -0.010251739684720105,
+          "trades": 88
+        },
+        {
+          "value": 28,
+          "score": 0.19779431292232819,
+          "sharpe": 0.8888587192978172,
+          "calmar": 3.924801249036353,
+          "return": 0.029892211318722772,
+          "drawdown": -0.0076162356822685314,
+          "trades": 74
+        },
+        {
+          "value": 30,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 32,
+          "score": 0.2112732373386082,
+          "sharpe": 0.9267718123817428,
+          "calmar": 5.098215143751815,
+          "return": 0.032084935762541233,
+          "drawdown": -0.006293366375850841,
+          "trades": 76
+        },
+        {
+          "value": 33,
+          "score": 0.2112732373386082,
+          "sharpe": 0.9267718123817428,
+          "calmar": 5.098215143751815,
+          "return": 0.032084935762541233,
+          "drawdown": -0.006293366375850841,
+          "trades": 76
+        },
+        {
+          "value": 35,
+          "score": 0.1378182435828664,
+          "sharpe": 0.6208040746854302,
+          "calmar": 2.6762994508218703,
+          "return": 0.020694854375326477,
+          "drawdown": -0.00773263782906328,
+          "trades": 80
+        },
+        {
+          "value": 36,
+          "score": 0.19061153624703875,
+          "sharpe": 0.8069914630328315,
+          "calmar": 5.772291337516348,
+          "return": 0.0263840214668023,
+          "drawdown": -0.004570805582061038,
+          "trades": 76
+        },
+        {
+          "value": 38,
+          "score": 0.17879563747551813,
+          "sharpe": 0.7601658737827971,
+          "calmar": 5.287065861773964,
+          "return": 0.024535005756665562,
+          "drawdown": -0.004640571235182865,
+          "trades": 73
+        },
+        {
+          "value": 40,
+          "score": 0.21697797054203255,
+          "sharpe": 0.9182163303881439,
+          "calmar": 6.586347238900485,
+          "return": 0.030222620242600806,
+          "drawdown": -0.004588677023297382,
+          "trades": 69
+        }
+      ],
+      "bb_std": [
+        {
+          "value": 1.5,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 1.5789473684210527,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 1.6578947368421053,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 1.736842105263158,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 1.8157894736842106,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 1.8947368421052633,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 1.9736842105263157,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.052631578947368,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.1315789473684212,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.2105263157894735,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.2894736842105265,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.3684210526315788,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.4473684210526314,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.526315789473684,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.6052631578947367,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.6842105263157894,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.763157894736842,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.8421052631578947,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.9210526315789473,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 3.0,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        }
+      ],
+      "atr_period": [
+        {
+          "value": 5,
+          "score": 0.01839236739185784,
+          "sharpe": 0.08615837776481694,
+          "calmar": 0.22708392146497924,
+          "return": 0.0018954173677165898,
+          "drawdown": -0.008346770460403996,
+          "trades": 8
+        },
+        {
+          "value": 6,
+          "score": 0.075807412853291,
+          "sharpe": 0.3391829117827907,
+          "calmar": 1.5699489723776185,
+          "return": 0.00908142261335776,
+          "drawdown": -0.005784533620608283,
+          "trades": 24
+        },
+        {
+          "value": 7,
+          "score": 0.17756787192591272,
+          "sharpe": 0.750438801823933,
+          "calmar": 5.433683135070904,
+          "return": 0.023377191432870204,
+          "drawdown": -0.00430227358713385,
+          "trades": 43
+        },
+        {
+          "value": 8,
+          "score": 0.18511128410318362,
+          "sharpe": 0.808016738736239,
+          "calmar": 4.627997176395586,
+          "return": 0.027596285546840127,
+          "drawdown": -0.005962900255771739,
+          "trades": 60
+        },
+        {
+          "value": 9,
+          "score": 0.13027798159685758,
+          "sharpe": 0.5870680476097568,
+          "calmar": 2.5189046203214924,
+          "return": 0.020238672997405782,
+          "drawdown": -0.008034711927608709,
+          "trades": 72
+        },
+        {
+          "value": 10,
+          "score": 0.13677202203379082,
+          "sharpe": 0.6198082438704413,
+          "calmar": 2.504780624880339,
+          "return": 0.021485260147565022,
+          "drawdown": -0.00857770135002998,
+          "trades": 74
+        },
+        {
+          "value": 11,
+          "score": 0.137567593688226,
+          "sharpe": 0.6300308043146041,
+          "calmar": 2.252617105657032,
+          "return": 0.022376047276500444,
+          "drawdown": -0.00993335583766417,
+          "trades": 82
+        },
+        {
+          "value": 12,
+          "score": 0.12890439132338027,
+          "sharpe": 0.5896529846143896,
+          "calmar": 2.1413453612939364,
+          "return": 0.020030069552449792,
+          "drawdown": -0.009353964995327216,
+          "trades": 76
+        },
+        {
+          "value": 13,
+          "score": 0.13820287278472848,
+          "sharpe": 0.6362085199578704,
+          "calmar": 2.135019430817822,
+          "return": 0.021455372929898298,
+          "drawdown": -0.01004926354308625,
+          "trades": 74
+        },
+        {
+          "value": 14,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 15,
+          "score": 0.14822574987260023,
+          "sharpe": 0.6749500549144595,
+          "calmar": 2.5870308661691914,
+          "return": 0.02254384191467751,
+          "drawdown": -0.008714175856765037,
+          "trades": 83
+        },
+        {
+          "value": 16,
+          "score": 0.16637557026480126,
+          "sharpe": 0.7586978131205584,
+          "calmar": 2.8594782633729614,
+          "return": 0.02539622428685795,
+          "drawdown": -0.008881418898040954,
+          "trades": 79
+        },
+        {
+          "value": 17,
+          "score": 0.14109471146804112,
+          "sharpe": 0.652930710495357,
+          "calmar": 2.045502978670262,
+          "return": 0.021079085671380282,
+          "drawdown": -0.010305086764079584,
+          "trades": 78
+        },
+        {
+          "value": 18,
+          "score": 0.15099806669623234,
+          "sharpe": 0.701021573998846,
+          "calmar": 2.0978227623184,
+          "return": 0.02284785636533493,
+          "drawdown": -0.010891223403489397,
+          "trades": 81
+        },
+        {
+          "value": 19,
+          "score": 0.15409515811274174,
+          "sharpe": 0.7121477008319749,
+          "calmar": 2.272631189732529,
+          "return": 0.02268464982631002,
+          "drawdown": -0.009981667913736513,
+          "trades": 76
+        },
+        {
+          "value": 20,
+          "score": 0.16897381780659335,
+          "sharpe": 0.7674594877148581,
+          "calmar": 3.0307620153779933,
+          "return": 0.02460826400488414,
+          "drawdown": -0.008119497301346184,
+          "trades": 76
+        }
+      ],
+      "breakout_atr_mult": [
+        {
+          "value": 1.2,
+          "score": 0.04812758945180569,
+          "sharpe": 0.22882278602778902,
+          "calmar": 0.447309887810943,
+          "return": 0.009486210539487727,
+          "drawdown": -0.021207245352682893,
+          "trades": 237.0
+        },
+        {
+          "value": 1.2947368421052632,
+          "score": 0.08157636886459807,
+          "sharpe": 0.38205362376389507,
+          "calmar": 0.9946868881903572,
+          "return": 0.014415725315044536,
+          "drawdown": -0.014492726792921936,
+          "trades": 179.0
+        },
+        {
+          "value": 1.3894736842105262,
+          "score": 0.1300598396198387,
+          "sharpe": 0.6070883908332877,
+          "calmar": 1.6702766443997843,
+          "return": 0.0218083673386682,
+          "drawdown": -0.013056739679494866,
+          "trades": 131.0
+        },
+        {
+          "value": 1.4842105263157894,
+          "score": 0.12800376492440438,
+          "sharpe": 0.5951668717200972,
+          "calmar": 1.740273159316828,
+          "return": 0.02017685878506037,
+          "drawdown": -0.011594075721412102,
+          "trades": 103.0
+        },
+        {
+          "value": 1.5789473684210527,
+          "score": 0.1881913066652953,
+          "sharpe": 0.8364006667878706,
+          "calmar": 4.108708145069348,
+          "return": 0.027572443678082426,
+          "drawdown": -0.006710733083139701,
+          "trades": 65.0
+        },
+        {
+          "value": 1.6736842105263157,
+          "score": 0.20845705167128414,
+          "sharpe": 0.9264850091186968,
+          "calmar": 4.55331766804052,
+          "return": 0.029509613050663797,
+          "drawdown": -0.006480903640391732,
+          "trades": 41.0
+        },
+        {
+          "value": 1.768421052631579,
+          "score": 0.22020419422006055,
+          "sharpe": 0.9322839931286658,
+          "calmar": 6.673321621243392,
+          "return": 0.028559061608282477,
+          "drawdown": -0.0042795871725063465,
+          "trades": 30.0
+        },
+        {
+          "value": 1.8631578947368421,
+          "score": 0.2206344861276186,
+          "sharpe": 0.8390796832889594,
+          "calmar": 10.499945093453627,
+          "return": 0.023911800191893207,
+          "drawdown": -0.002277326212572429,
+          "trades": 20.0
+        },
+        {
+          "value": 1.9578947368421051,
+          "score": 0.1894416846806048,
+          "sharpe": 0.7207295988712377,
+          "calmar": 9.00925660981313,
+          "return": 0.018711139296869517,
+          "drawdown": -0.002076879381644966,
+          "trades": 10.0
+        },
+        {
+          "value": 2.052631578947368,
+          "score": 0.1908116325793834,
+          "sharpe": 0.7259508788178993,
+          "calmar": 9.074036219871779,
+          "return": 0.018845678733349525,
+          "drawdown": -0.0020768793816447677,
+          "trades": 9.0
+        },
+        {
+          "value": 2.1473684210526316,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 2.242105263157895,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 2.336842105263158,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 2.431578947368421,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 2.526315789473684,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 2.621052631578947,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 2.7157894736842105,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 2.810526315789474,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 2.905263157894737,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 3.0,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        }
+      ],
+      "ma_period": [
+        {
+          "value": 10,
+          "score": 0.1646027634659707,
+          "sharpe": 0.7364800293601306,
+          "calmar": 3.3838132568801504,
+          "return": 0.029076848215785267,
+          "drawdown": -0.008592923429407536,
+          "trades": 111
+        },
+        {
+          "value": 11,
+          "score": 0.12142203947124172,
+          "sharpe": 0.5635804478530452,
+          "calmar": 1.6837459209101888,
+          "return": 0.021541522206130592,
+          "drawdown": -0.01279380810287921,
+          "trades": 114
+        },
+        {
+          "value": 12,
+          "score": 0.13204910634490455,
+          "sharpe": 0.6135381489039733,
+          "calmar": 1.806562128763893,
+          "return": 0.023149944021781055,
+          "drawdown": -0.012814363620929537,
+          "trades": 110
+        },
+        {
+          "value": 13,
+          "score": 0.12941231084111265,
+          "sharpe": 0.5899495858581641,
+          "calmar": 2.226021991962754,
+          "return": 0.021921278224954932,
+          "drawdown": -0.009847736592047884,
+          "trades": 105
+        },
+        {
+          "value": 14,
+          "score": 0.12124430597778602,
+          "sharpe": 0.5634461120659431,
+          "calmar": 1.6587573819234747,
+          "return": 0.019597249123502136,
+          "drawdown": -0.011814415620431125,
+          "trades": 102
+        },
+        {
+          "value": 15,
+          "score": 0.14735859355930372,
+          "sharpe": 0.6858311205633014,
+          "calmar": 1.9724456846210536,
+          "return": 0.02476057676536292,
+          "drawdown": -0.012553236298681615,
+          "trades": 105
+        },
+        {
+          "value": 16,
+          "score": 0.13814785402835933,
+          "sharpe": 0.6427203797662182,
+          "calmar": 1.8585404227628877,
+          "return": 0.02333069709759461,
+          "drawdown": -0.01255323629868186,
+          "trades": 105
+        },
+        {
+          "value": 17,
+          "score": 0.13166703675589458,
+          "sharpe": 0.6127781726625716,
+          "calmar": 1.763254961511582,
+          "return": 0.022134556186676813,
+          "drawdown": -0.012553236298681143,
+          "trades": 104
+        },
+        {
+          "value": 18,
+          "score": 0.1582657349398744,
+          "sharpe": 0.7195007057003165,
+          "calmar": 2.8039314265627353,
+          "return": 0.025945250024805855,
+          "drawdown": -0.009253168525812146,
+          "trades": 101
+        },
+        {
+          "value": 19,
+          "score": 0.14176667829429535,
+          "sharpe": 0.6431675841938899,
+          "calmar": 2.566311248055397,
+          "return": 0.022620391143028495,
+          "drawdown": -0.00881435997296467,
+          "trades": 98
+        },
+        {
+          "value": 20,
+          "score": 0.13347249801920671,
+          "sharpe": 0.6018837477526471,
+          "calmar": 2.564556970552542,
+          "return": 0.020472271193594738,
+          "drawdown": -0.007982771070663298,
+          "trades": 94
+        },
+        {
+          "value": 21,
+          "score": 0.153416439729377,
+          "sharpe": 0.6897375050583142,
+          "calmar": 3.0293018158106624,
+          "return": 0.0241822228995614,
+          "drawdown": -0.00798277107066338,
+          "trades": 95
+        },
+        {
+          "value": 22,
+          "score": 0.14760687653611995,
+          "sharpe": 0.6660668450908985,
+          "calmar": 2.8167851918262112,
+          "return": 0.023218616910689827,
+          "drawdown": -0.008242949081834835,
+          "trades": 92
+        },
+        {
+          "value": 23,
+          "score": 0.15468497337315482,
+          "sharpe": 0.7018075764678707,
+          "calmar": 2.799514426755984,
+          "return": 0.024441445935056372,
+          "drawdown": -0.008730601886334476,
+          "trades": 92
+        },
+        {
+          "value": 24,
+          "score": 0.14449421076380817,
+          "sharpe": 0.6573090564562032,
+          "calmar": 2.546556698910611,
+          "return": 0.02247119835108502,
+          "drawdown": -0.008824150022144785,
+          "trades": 89
+        },
+        {
+          "value": 25,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 26,
+          "score": 0.17573504934382872,
+          "sharpe": 0.7694152355862245,
+          "calmar": 4.30387677366799,
+          "return": 0.024946376868288933,
+          "drawdown": -0.00579625723043839,
+          "trades": 75
+        },
+        {
+          "value": 27,
+          "score": 0.15557992761726444,
+          "sharpe": 0.6806826945482936,
+          "calmar": 3.829486570263127,
+          "return": 0.022196689221755106,
+          "drawdown": -0.005796257230438584,
+          "trades": 76
+        },
+        {
+          "value": 28,
+          "score": 0.17934798814348374,
+          "sharpe": 0.7789929232909272,
+          "calmar": 4.641173729201034,
+          "return": 0.025765112946982693,
+          "drawdown": -0.005551421784725583,
+          "trades": 75
+        },
+        {
+          "value": 30,
+          "score": 0.1814446292752569,
+          "sharpe": 0.7889589074588753,
+          "calmar": 4.6598008181622,
+          "return": 0.026538276950311745,
+          "drawdown": -0.005695152644051919,
+          "trades": 77
+        }
+      ],
+      "pullback_bps": [
+        {
+          "value": 5,
+          "score": 0.06117064957173645,
+          "sharpe": 0.27649509761197827,
+          "calmar": 1.1645976882690818,
+          "return": 0.0036481205996536925,
+          "drawdown": -0.00313251574891568,
+          "trades": 14
+        },
+        {
+          "value": 6,
+          "score": 0.0661777860583934,
+          "sharpe": 0.29959084547941767,
+          "calmar": 1.2412920051120824,
+          "return": 0.00398677027120975,
+          "drawdown": -0.0032117908234249558,
+          "trades": 17
+        },
+        {
+          "value": 7,
+          "score": 0.045324142256018586,
+          "sharpe": 0.2091796111110085,
+          "calmar": 0.6901947274385777,
+          "return": 0.0027934797467998873,
+          "drawdown": -0.004047379146414135,
+          "trades": 19
+        },
+        {
+          "value": 8,
+          "score": 0.07599799379081774,
+          "sharpe": 0.3509183072227702,
+          "calmar": 1.14828749158445,
+          "return": 0.005467116625609281,
+          "drawdown": -0.004761104397353966,
+          "trades": 22
+        },
+        {
+          "value": 10,
+          "score": 0.0832244862535367,
+          "sharpe": 0.390517025101851,
+          "calmar": 1.0054159037669042,
+          "return": 0.007050128574899395,
+          "drawdown": -0.007012151437514855,
+          "trades": 32
+        },
+        {
+          "value": 11,
+          "score": 0.0920624201028318,
+          "sharpe": 0.42998871165322944,
+          "calmar": 1.1906711113830721,
+          "return": 0.008349166145291687,
+          "drawdown": -0.007012151437514408,
+          "trades": 36
+        },
+        {
+          "value": 12,
+          "score": 0.09812005093999492,
+          "sharpe": 0.4618336981350561,
+          "calmar": 1.1258930710229755,
+          "return": 0.009288446840160836,
+          "drawdown": -0.008249848124317385,
+          "trades": 39
+        },
+        {
+          "value": 14,
+          "score": 0.15035246261899599,
+          "sharpe": 0.6871625446286964,
+          "calmar": 2.5415602858567294,
+          "return": 0.015911419797978388,
+          "drawdown": -0.006260492771516076,
+          "trades": 50
+        },
+        {
+          "value": 15,
+          "score": 0.16650844386644353,
+          "sharpe": 0.7567144702299428,
+          "calmar": 2.9858137909624594,
+          "return": 0.017736064923201234,
+          "drawdown": -0.0059401108591852665,
+          "trades": 52
+        },
+        {
+          "value": 16,
+          "score": 0.16910635436237903,
+          "sharpe": 0.7547688904677818,
+          "calmar": 3.58232940513567,
+          "return": 0.018069693235823525,
+          "drawdown": -0.005044118279552572,
+          "trades": 58
+        },
+        {
+          "value": 18,
+          "score": 0.16805936361464083,
+          "sharpe": 0.754892417077914,
+          "calmar": 3.365314348021372,
+          "return": 0.0190731344213384,
+          "drawdown": -0.0056675639922173695,
+          "trades": 67
+        },
+        {
+          "value": 19,
+          "score": 0.151466918873088,
+          "sharpe": 0.6851576217570168,
+          "calmar": 2.840862945380729,
+          "return": 0.01733098460857474,
+          "drawdown": -0.006100605675734935,
+          "trades": 71
+        },
+        {
+          "value": 20,
+          "score": 0.13129764952671236,
+          "sharpe": 0.6025635503772636,
+          "calmar": 2.116367756537866,
+          "return": 0.015232550142772805,
+          "drawdown": -0.007197496794078693,
+          "trades": 73
+        },
+        {
+          "value": 22,
+          "score": 0.14185145497580684,
+          "sharpe": 0.6465493723566913,
+          "calmar": 2.464498601286567,
+          "return": 0.016431562352680062,
+          "drawdown": -0.006667304393722167,
+          "trades": 76
+        },
+        {
+          "value": 23,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 24,
+          "score": 0.15166935514425223,
+          "sharpe": 0.6865260207197152,
+          "calmar": 2.809891595876623,
+          "return": 0.023601976569456173,
+          "drawdown": -0.008399603957708158,
+          "trades": 91
+        },
+        {
+          "value": 26,
+          "score": 0.15266186833783518,
+          "sharpe": 0.6923416402088909,
+          "calmar": 2.771639412214608,
+          "return": 0.02515074262379735,
+          "drawdown": -0.009074319881929117,
+          "trades": 93
+        },
+        {
+          "value": 27,
+          "score": 0.11636373027763054,
+          "sharpe": 0.5404617826254197,
+          "calmar": 1.6017114582843945,
+          "return": 0.01971123458434776,
+          "drawdown": -0.012306357978771417,
+          "trades": 99
+        },
+        {
+          "value": 28,
+          "score": 0.13179910803029318,
+          "sharpe": 0.6009084376715673,
+          "calmar": 2.2652658973621396,
+          "return": 0.021831825687675943,
+          "drawdown": -0.009637643736701595,
+          "trades": 100
+        },
+        {
+          "value": 30,
+          "score": 0.1378460647640098,
+          "sharpe": 0.6282819899245502,
+          "calmar": 2.3770716206270044,
+          "return": 0.022823150697355743,
+          "drawdown": -0.009601372756002884,
+          "trades": 101
+        }
+      ],
+      "max_1h_bars": [
+        {
+          "value": 12,
+          "score": 0.22252986596687763,
+          "sharpe": 0.9393619078478849,
+          "calmar": 6.848951729253592,
+          "return": 0.03095443132745035,
+          "drawdown": -0.004519586726715594,
+          "trades": 67
+        },
+        {
+          "value": 13,
+          "score": 0.22039304947584415,
+          "sharpe": 0.9270362813827936,
+          "calmar": 6.915600573402795,
+          "return": 0.03058427492035909,
+          "drawdown": -0.0044225045382154295,
+          "trades": 71
+        },
+        {
+          "value": 15,
+          "score": 0.22590055525991218,
+          "sharpe": 0.9497934543460643,
+          "calmar": 7.104586040786475,
+          "return": 0.031420064007520176,
+          "drawdown": -0.0044225045382154295,
+          "trades": 72
+        },
+        {
+          "value": 17,
+          "score": 0.19324910711524063,
+          "sharpe": 0.8502816347381937,
+          "calmar": 4.563536821687942,
+          "return": 0.028132204437161468,
+          "drawdown": -0.006164561728408723,
+          "trades": 78
+        },
+        {
+          "value": 19,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 21,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 23,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 25,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 27,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 29,
+          "score": 0.14150016569285234,
+          "sharpe": 0.6419969210582142,
+          "calmar": 2.5630066411436134,
+          "return": 0.021431120661859593,
+          "drawdown": -0.008361710936611942,
+          "trades": 84
+        },
+        {
+          "value": 30,
+          "score": 0.14150016569285234,
+          "sharpe": 0.6419969210582142,
+          "calmar": 2.5630066411436134,
+          "return": 0.021431120661859593,
+          "drawdown": -0.008361710936611942,
+          "trades": 84
+        },
+        {
+          "value": 32,
+          "score": 0.14150016569285234,
+          "sharpe": 0.6419969210582142,
+          "calmar": 2.5630066411436134,
+          "return": 0.021431120661859593,
+          "drawdown": -0.008361710936611942,
+          "trades": 84
+        },
+        {
+          "value": 34,
+          "score": 0.14150016569285234,
+          "sharpe": 0.6419969210582142,
+          "calmar": 2.5630066411436134,
+          "return": 0.021431120661859593,
+          "drawdown": -0.008361710936611942,
+          "trades": 84
+        },
+        {
+          "value": 36,
+          "score": 0.14150016569285234,
+          "sharpe": 0.6419969210582142,
+          "calmar": 2.5630066411436134,
+          "return": 0.021431120661859593,
+          "drawdown": -0.008361710936611942,
+          "trades": 84
+        },
+        {
+          "value": 38,
+          "score": 0.13888951936121596,
+          "sharpe": 0.6301610652272464,
+          "calmar": 2.5153737219258825,
+          "return": 0.021032827960296263,
+          "drawdown": -0.008361710936612867,
+          "trades": 85
+        },
+        {
+          "value": 40,
+          "score": 0.13888951936121596,
+          "sharpe": 0.6301610652272464,
+          "calmar": 2.5153737219258825,
+          "return": 0.021032827960296263,
+          "drawdown": -0.008361710936612867,
+          "trades": 85
+        },
+        {
+          "value": 42,
+          "score": 0.13888951936121596,
+          "sharpe": 0.6301610652272464,
+          "calmar": 2.5153737219258825,
+          "return": 0.021032827960296263,
+          "drawdown": -0.008361710936612867,
+          "trades": 85
+        },
+        {
+          "value": 44,
+          "score": 0.13888951936121596,
+          "sharpe": 0.6301610652272464,
+          "calmar": 2.5153737219258825,
+          "return": 0.021032827960296263,
+          "drawdown": -0.008361710936612867,
+          "trades": 85
+        },
+        {
+          "value": 46,
+          "score": 0.13888951936121596,
+          "sharpe": 0.6301610652272464,
+          "calmar": 2.5153737219258825,
+          "return": 0.021032827960296263,
+          "drawdown": -0.008361710936612867,
+          "trades": 85
+        },
+        {
+          "value": 48,
+          "score": 0.13888951936121596,
+          "sharpe": 0.6301610652272464,
+          "calmar": 2.5153737219258825,
+          "return": 0.021032827960296263,
+          "drawdown": -0.008361710936612867,
+          "trades": 85
+        }
+      ],
+      "pullback_atr_mult": [
+        {
+          "value": 0.5,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 0.5789473684210527,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 0.6578947368421053,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 0.7368421052631579,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 0.8157894736842105,
+          "score": null,
+          "sharpe": null,
+          "calmar": null,
+          "return": null,
+          "drawdown": null,
+          "trades": null
+        },
+        {
+          "value": 0.8947368421052632,
+          "score": 0.06270714601821675,
+          "sharpe": 0.28542479857014363,
+          "calmar": 1.1176910675584901,
+          "return": 0.0025298224796674873,
+          "drawdown": -0.0022634362509433748,
+          "trades": 7.0
+        },
+        {
+          "value": 0.9736842105263157,
+          "score": 0.05540014765764954,
+          "sharpe": 0.258981435317684,
+          "calmar": 0.7139902266172684,
+          "return": 0.0025432095769803986,
+          "drawdown": -0.0035619669319979026,
+          "trades": 10.0
+        },
+        {
+          "value": 1.0526315789473684,
+          "score": 0.135580556603964,
+          "sharpe": 0.5950103957945799,
+          "calmar": 3.290709075920776,
+          "return": 0.009369904908310467,
+          "drawdown": -0.002847381732062919,
+          "trades": 15.0
+        },
+        {
+          "value": 1.131578947368421,
+          "score": 0.13264109581184924,
+          "sharpe": 0.605624063286691,
+          "calmar": 2.2759076195402446,
+          "return": 0.0102558792607359,
+          "drawdown": -0.004506280998702262,
+          "trades": 22.0
+        },
+        {
+          "value": 1.2105263157894737,
+          "score": 0.20054398593765674,
+          "sharpe": 0.8288909626640597,
+          "calmar": 6.89188506824174,
+          "return": 0.022977604772707716,
+          "drawdown": -0.0033340086993890877,
+          "trades": 27.0
+        },
+        {
+          "value": 1.2894736842105263,
+          "score": 0.17939545539709714,
+          "sharpe": 0.7662999971724004,
+          "calmar": 5.169377731076915,
+          "return": 0.021642548042438925,
+          "drawdown": -0.00418668342077804,
+          "trades": 35.0
+        },
+        {
+          "value": 1.3684210526315788,
+          "score": 0.14446231256319914,
+          "sharpe": 0.6645124311252765,
+          "calmar": 2.2592973795937823,
+          "return": 0.01975045801312003,
+          "drawdown": -0.008741858504997306,
+          "trades": 50.0
+        },
+        {
+          "value": 1.4473684210526314,
+          "score": 0.1559428841748121,
+          "sharpe": 0.719714696935656,
+          "calmar": 2.339934994111144,
+          "return": 0.022520236284388595,
+          "drawdown": -0.009624299966052352,
+          "trades": 64.0
+        },
+        {
+          "value": 1.526315789473684,
+          "score": 0.15480013899092845,
+          "sharpe": 0.7024113161351764,
+          "calmar": 2.801116156510335,
+          "return": 0.023422123600611577,
+          "drawdown": -0.008361710936611479,
+          "trades": 82.0
+        },
+        {
+          "value": 1.6052631578947367,
+          "score": 0.12865586802520482,
+          "sharpe": 0.5847536050359343,
+          "calmar": 2.286883002539215,
+          "return": 0.020304900399141568,
+          "drawdown": -0.008878854045701616,
+          "trades": 95.0
+        },
+        {
+          "value": 1.6842105263157894,
+          "score": 0.11137438400563025,
+          "sharpe": 0.5051385050517692,
+          "calmar": 2.019222980387283,
+          "return": 0.018792607000501116,
+          "drawdown": -0.009306850795099771,
+          "trades": 118.0
+        },
+        {
+          "value": 1.763157894736842,
+          "score": 0.08899488369114654,
+          "sharpe": 0.41010080157322415,
+          "calmar": 1.3531352087117308,
+          "return": 0.01567854997072904,
+          "drawdown": -0.0115868317295919,
+          "trades": 144.0
+        },
+        {
+          "value": 1.8421052631578947,
+          "score": 0.031158869346684326,
+          "sharpe": 0.1479316783864858,
+          "calmar": 0.29916305082817357,
+          "return": 0.005753881143472084,
+          "drawdown": -0.019233261352107504,
+          "trades": 165.0
+        },
+        {
+          "value": 1.9210526315789473,
+          "score": 0.012779845480386035,
+          "sharpe": 0.061107823867639646,
+          "calmar": 0.10551203433604923,
+          "return": 0.0023040401383394027,
+          "drawdown": -0.021836752109253992,
+          "trades": 190.0
+        },
+        {
+          "value": 2.0,
+          "score": 0.0,
+          "sharpe": -0.039845918708767865,
+          "calmar": -0.07598762185876307,
+          "return": -0.0018493152671171798,
+          "drawdown": -0.02433705940362855,
+          "trades": 211.0
+        }
+      ],
+      "swing_lookback": [
+        {
+          "value": 5,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 6,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 7,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 8,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 9,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 10,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 11,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 12,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 13,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 14,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 15,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 16,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 17,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 18,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 19,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 20,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        }
+      ],
+      "pattern_wick": [
+        {
+          "value": 1.5,
+          "score": 0.24166811068109365,
+          "sharpe": 1.042824777753597,
+          "calmar": 6.5101870061450136,
+          "return": 0.04141650747368697,
+          "drawdown": -0.006361799965898618,
+          "trades": 99
+        },
+        {
+          "value": 1.5789473684210527,
+          "score": 0.23413992592669022,
+          "sharpe": 1.0115976059410443,
+          "calmar": 6.2579166439834975,
+          "return": 0.039811613892291486,
+          "drawdown": -0.006361799965898758,
+          "trades": 96
+        },
+        {
+          "value": 1.6578947368421053,
+          "score": 0.2256865451270548,
+          "sharpe": 0.9751411587580853,
+          "calmar": 6.029375525717175,
+          "return": 0.03835768101389281,
+          "drawdown": -0.006361799965897842,
+          "trades": 93
+        },
+        {
+          "value": 1.736842105263158,
+          "score": 0.22186898353696094,
+          "sharpe": 0.9696936383558628,
+          "calmar": 5.4844516612574115,
+          "return": 0.038099816962601674,
+          "drawdown": -0.006946878068365833,
+          "trades": 93
+        },
+        {
+          "value": 1.8157894736842106,
+          "score": 0.20802268333264737,
+          "sharpe": 0.9294303826395552,
+          "calmar": 4.32988140801357,
+          "return": 0.03653998235013489,
+          "drawdown": -0.00843902613187238,
+          "trades": 93
+        },
+        {
+          "value": 1.8947368421052633,
+          "score": 0.23450410277637998,
+          "sharpe": 1.0219413234679353,
+          "calmar": 5.916837473997199,
+          "return": 0.03987380346051905,
+          "drawdown": -0.006739039839399504,
+          "trades": 91
+        },
+        {
+          "value": 1.9736842105263157,
+          "score": 0.2253876071608027,
+          "sharpe": 0.9984229788629335,
+          "calmar": 5.036992995709365,
+          "return": 0.03885348072518591,
+          "drawdown": -0.007713626117463784,
+          "trades": 90
+        },
+        {
+          "value": 2.052631578947368,
+          "score": 0.169843179223455,
+          "sharpe": 0.770404001112383,
+          "calmar": 3.083228200990781,
+          "return": 0.025967849701835855,
+          "drawdown": -0.00842229248340788,
+          "trades": 86
+        },
+        {
+          "value": 2.1315789473684212,
+          "score": 0.16446716652968618,
+          "sharpe": 0.7459678699971967,
+          "calmar": 2.9876182533598654,
+          "return": 0.02516259475856497,
+          "drawdown": -0.00842229248340788,
+          "trades": 86
+        },
+        {
+          "value": 2.2105263157894735,
+          "score": 0.15775738114063734,
+          "sharpe": 0.7158309990383112,
+          "calmar": 2.8541339964485437,
+          "return": 0.024038351304929595,
+          "drawdown": -0.008422292483408627,
+          "trades": 84
+        },
+        {
+          "value": 2.2894736842105265,
+          "score": 0.15062710765857784,
+          "sharpe": 0.683765601333061,
+          "calmar": 2.713845999036294,
+          "return": 0.022856804758812466,
+          "drawdown": -0.008422292483408814,
+          "trades": 83
+        },
+        {
+          "value": 2.3684210526315788,
+          "score": 0.14911319296536235,
+          "sharpe": 0.6781829199608691,
+          "calmar": 2.634869365480902,
+          "return": 0.022669660933802405,
+          "drawdown": -0.008603713425338968,
+          "trades": 83
+        },
+        {
+          "value": 2.4473684210526314,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.526315789473684,
+          "score": 0.14791283852633502,
+          "sharpe": 0.671120307416248,
+          "calmar": 2.678040735270935,
+          "return": 0.022393002504806025,
+          "drawdown": -0.008361710936611479,
+          "trades": 83
+        },
+        {
+          "value": 2.6052631578947367,
+          "score": 0.1577335049078151,
+          "sharpe": 0.7154871637606347,
+          "calmar": 2.8633673639309105,
+          "return": 0.0239426502025184,
+          "drawdown": -0.008361710936611802,
+          "trades": 83
+        },
+        {
+          "value": 2.6842105263157894,
+          "score": 0.1577335049078151,
+          "sharpe": 0.7154871637606347,
+          "calmar": 2.8633673639309105,
+          "return": 0.0239426502025184,
+          "drawdown": -0.008361710936611802,
+          "trades": 83
+        },
+        {
+          "value": 2.763157894736842,
+          "score": 0.1613860023415267,
+          "sharpe": 0.7285069638860567,
+          "calmar": 3.0719050434663067,
+          "return": 0.024381326023787953,
+          "drawdown": -0.007936874896457186,
+          "trades": 82
+        },
+        {
+          "value": 2.8421052631578947,
+          "score": 0.15622864862676364,
+          "sharpe": 0.7053854835282023,
+          "calmar": 2.9675031802343477,
+          "return": 0.023552701496359463,
+          "drawdown": -0.00793687489645739,
+          "trades": 80
+        },
+        {
+          "value": 2.9210526315789473,
+          "score": 0.15622864862676364,
+          "sharpe": 0.7053854835282023,
+          "calmar": 2.9675031802343477,
+          "return": 0.023552701496359463,
+          "drawdown": -0.00793687489645739,
+          "trades": 80
+        },
+        {
+          "value": 3.0,
+          "score": 0.14298202179059002,
+          "sharpe": 0.6576643990288884,
+          "calmar": 2.231836175506284,
+          "return": 0.02174708304606887,
+          "drawdown": -0.00974403197005964,
+          "trades": 79
+        }
+      ]
+    },
+    "perturbation": [
+      {
+        "offset_pct": 0.05,
+        "n_valid": 50,
+        "mean_score": 0.16539718153885868,
+        "median_score": 0.17182076315191813,
+        "std_score": 0.03868335783510057,
+        "min_score": 0.07200168543314847,
+        "degradation": -0.11820706834323023
+      },
+      {
+        "offset_pct": 0.1,
+        "n_valid": 50,
+        "mean_score": 0.15359090691237054,
+        "median_score": 0.15916250653894412,
+        "std_score": 0.051761022911892336,
+        "min_score": 0.027121748537731173,
+        "degradation": -0.038387934695909245
+      },
+      {
+        "offset_pct": 0.2,
+        "n_valid": 50,
+        "mean_score": 0.15060091615076285,
+        "median_score": 0.15915291751515526,
+        "std_score": 0.07724451822859559,
+        "min_score": 0.0,
+        "degradation": -0.018173389485384186
+      }
+    ],
+    "cost_stress": null
+  },
+  "verdict": {
+    "tradeable": false,
+    "oos_sharpe": 0.6805991594927362,
+    "overfit_ratio": 0.4010004136970604,
+    "param_stability": "mixed",
+    "long_short_balance": "balanced",
+    "conclusion": "Strategy does not meet minimum quality thresholds. Issues: Significant performance degradation from in-sample to out-of-sample \u2014 possible overfitting.",
+    "warnings": [
+      "Significant performance degradation from in-sample to out-of-sample \u2014 possible overfitting"
+    ]
+  }
+}

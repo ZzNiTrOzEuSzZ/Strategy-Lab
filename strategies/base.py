@@ -50,6 +50,20 @@ class BaseStrategy(ABC):
     DESCRIPTION: str  = ""
     PARAM_SPACE: dict = {}
 
+    TIMEFRAMES: dict = {
+        "primary": "1H",
+        "aux":     ["4H"],
+    }
+    # Example for a daily strategy with weekly filter:
+    # TIMEFRAMES = {"primary": "1D", "aux": ["1W"]}
+    # Example for a simple single-timeframe strategy:
+    # TIMEFRAMES = {"primary": "1D", "aux": []}
+
+    ASSET_CLASSES: list = ["fx", "crypto", "equities"]
+    # Declares which asset classes this strategy is designed for.
+    # The runner uses this as the default when --assets is not specified.
+    # A strategy that only makes sense on FX would declare: ["fx"]
+
     @abstractmethod
     def generate_signals(self, context, params: dict) -> pd.DataFrame:
         """

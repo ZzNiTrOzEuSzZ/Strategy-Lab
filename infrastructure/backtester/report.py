@@ -123,13 +123,13 @@ def _build_verdict(
     if overfit_ratio is None or overfit_ratio < 0.5:
         warnings_list.append(
             "Significant performance degradation from in-sample to out-of-sample "
-            "— possible overfitting"
+            "-- possible overfitting"
         )
 
     param_stab = _param_stability_label(stability_df)
     if param_stab == "unstable":
         warnings_list.append(
-            "Parameters unstable across walk-forward folds — strategy may be curve-fitted"
+            "Parameters unstable across walk-forward folds -- strategy may be curve-fitted"
         )
 
     if pct_folds_profitable is not None and pct_folds_profitable < 0.5:
@@ -222,7 +222,7 @@ def build_report(
     fold_records = wf.get("fold_records", [])
     cp           = wf.get("consensus_params", {})
 
-    # ── metadata ──────────────────────────────────────────────────────────────
+    # -- metadata --------------------------------------------------------------
     primary_df   = None
     data_start   = None
     data_end     = None
@@ -247,7 +247,7 @@ def build_report(
         "num_folds":            len(fold_records),
     }
 
-    # ── full period ───────────────────────────────────────────────────────────
+    # -- full period -----------------------------------------------------------
     ds = full_metrics.get("direction_split") if full_metrics else None
 
     def _slim_metrics(m):
@@ -270,7 +270,7 @@ def build_report(
         "short_only": _slim_metrics(ds.get("short_only") if ds else None),
     }
 
-    # ── walk-forward ──────────────────────────────────────────────────────────
+    # -- walk-forward ----------------------------------------------------------
     avg_oos_sharpe    = None
     avg_oos_return    = None
     avg_oos_drawdown  = None
@@ -311,7 +311,7 @@ def build_report(
         ),
     }
 
-    # ── robustness ────────────────────────────────────────────────────────────
+    # -- robustness ------------------------------------------------------------
     def _sens_to_json(sens):
         if not sens:
             return None
@@ -331,7 +331,7 @@ def build_report(
         ),
     }
 
-    # ── verdict ───────────────────────────────────────────────────────────────
+    # -- verdict ---------------------------------------------------------------
     max_dd_for_verdict = (
         full_period["combined"]["max_drawdown"]
         if full_period["combined"] else None
@@ -406,5 +406,5 @@ def save_report(report: dict, results_dir: str = "results") -> str:
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, default=str)
 
-    print(f"✓ Report saved -> {filepath}")
+    print(f"OK Report saved -> {filepath}")
     return str(filepath)
