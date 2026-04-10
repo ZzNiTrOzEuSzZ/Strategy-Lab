@@ -42,6 +42,7 @@ import yaml
 from infrastructure.backtester import (
     Research, build_report, save_report, list_available,
 )
+from infrastructure.backtester.html_report import build_html_report
 from strategies.base import BaseStrategy
 
 
@@ -191,18 +192,17 @@ def _save_charts(report_data: dict, report: dict, ticker: str, charts_dir: Path)
             print(f"  WARNING oos_equity chart: {e}")
 
     # 6. Full WF dashboard
-    if results_df is not None and len(results_df) > 0:
+    wf_results_raw = report_data.get("wf_results", {})
+    if wf_results_raw and results_df is not None and len(results_df) > 0:
         try:
-            p = str(charts_dir / "wf_dashboard.html")
+            p = str(charts_dir / "wf_dashboard")
             plot_walk_forward_results(
-                results_df       = results_df,
-                oos_metrics      = oos_metrics,
-                oos_combined_df  = oos_combined,
-                stability_df     = stability_df,
-                show             = False,
-                save_html        = p,
+                results      = wf_results_raw,
+                param_defs   = {},
+                show         = False,
+                save_html_dir = p,
             )
-            saved.append("wf_dashboard.html")
+            saved.append("wf_dashboard/")
         except Exception as e:
             print(f"  WARNING wf_dashboard chart: {e}")
 
@@ -318,6 +318,16 @@ def _run_one_asset(
             save_report(report)
             charts_dir = Path("results") / "charts" / ticker
             _save_charts(report_data, report, ticker, charts_dir)
+            try:
+                build_html_report(
+                    report           = report,
+                    research_results = report_data,
+                    strategy_fn      = strategy_instance.generate_signals,
+                    context          = r.full_context,
+                    results_dir      = "results",
+                )
+            except Exception as e:
+                print(f"  WARNING: HTML report failed: {e}")
     except Exception as e:
         print(f"  ERROR building report: {e}")
         return None

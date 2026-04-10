@@ -159,6 +159,15 @@ class Research:
         )
 
     # -----------------------------------------------------------------------
+    # Public properties
+    # -----------------------------------------------------------------------
+
+    @property
+    def full_context(self):
+        """Return the full BacktestContext for the entire date range."""
+        return self._full_context
+
+    # -----------------------------------------------------------------------
     # Default score / reject (preserved from Epsilon Fund)
     # -----------------------------------------------------------------------
 
